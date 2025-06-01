@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch Your Business Today - Zero Cost Opportunity Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            animation: slideInDown 0.8s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+            opacity: 0.95;
+        }
+
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .value-prop {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .value-prop:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-prop .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .value-prop h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .value-prop p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.5);
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+            margin: -40px auto 60px;
+            max-width: 700px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            display: none;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .phase {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .phase.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1e40af;
+        }
+
+        .phase.inactive {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .phase.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #10b981;
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .quiz-content {
+            padding: 40px;
+        }
+
+        .question-section {
+            display: none;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        .question-number {
+            color: #3b82f6;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1a202c;
+        }
+
+        .question-subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .option-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .option.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .option-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .text-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .insight-alert {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: none;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .insight-alert.show {
+            display: block;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            background: #f8fafc;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Results Section */
+        .results {
+            display: none;
+            padding: 40px;
+        }
+
+        .results.show {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        .results-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .skill-summary {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .skill-summary h3 {
+            color: #1e40af;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 5px;
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .opportunity {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid #f59e0b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opportunity::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+            opacity: 0.1;
+        }
+
+        .opportunity-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .opportunity-number {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .opportunity-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a202c;
+        }
+
+        .opportunity-model {
+            background: #fef3c7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .model-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .action-steps {
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 4px solid #10b981;
+        }
+
+        .steps-title {
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #d1fae5;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            background: #10b981;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content {
+            flex: 1;
+            font-weight: 500;
+            color: #065f46;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .value-props {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .quiz-container {
+                margin: -30px 15px 40px;
+            }
+            
+            .quiz-content {
+                padding: 30px 25px;
+            }
+            
+            .navigation {
+                padding: 25px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .phase-indicator {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .opportunity {
+                padding: 25px 20px;
+            }
+            
+            .opportunity-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Launch Your Business Today</h1>
+                <p class="subtitle">Discover zero-cost opportunities using only your existing skills and resources</p>
+                
+                <div class="value-props">
+                    <div class="value-prop">
+                        <span class="icon">⚡</span>
+                        <h3>Start in 24 Hours</h3>
+                        <p>No waiting, no complex setup - launch immediately</p>
+                    </div>
+                    <div class="value-prop">
+                        <span class="icon">💰</span>
+                        <h3>Zero Investment</h3>
+                        <p>Use only what you already have and know</p>
+                    </div>
+                    <div class="value-prop">
+                        <span class="icon">🎯</span>
+                        <h3>Perfect Match</h3>
+                        <p>Opportunities tailored to your unique skills</p>
+                    </div>
+                    <div class="value-prop">
+                        <span class="icon">📈</span>
+                        <h3>Profit Ready</h3>
+                        <p>Clear path to earning from day one</p>
+                    </div>
+                </div>
+                
+                <button class="start-button" onclick="startAssessment()">
+                    Find My Business Opportunity
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container" id="quizContainer">
+        <div class="quiz-header">
+            <div class="phase-indicator">
+                <div class="phase active" id="phase1">Skills Assessment</div>
+                <div class="phase inactive" id="phase2">Resource Check</div>
+                <div class="phase inactive" id="phase3">Business Matching</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Question 1 of 15</p>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Phase 1: Skills Assessment Questions -->
+            <div class="question-section active" data-phase="1">
+                <div class="question-number">SKILLS ASSESSMENT - Question 1</div>
+                <div class="question-title">What software or digital tools do you use regularly?</div>
+                <div class="question-subtitle">Focus on what you're actually comfortable with, not what you've used once</div>
+                <div class="option-grid">
+                    <div class="option" data-value="design">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-content">
+                            <div class="option-title">Design Tools</div>
+                            <div class="option-desc">Photoshop, Canva, Figma, Illustrator</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="office">
+                        <div class="option-icon">📊</div>
+                        <div class="option-content">
+                            <div class="option-title">Office Suite</div>
+                            <div class="option-desc">Excel, Word, PowerPoint, Google Workspace</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="video">
+                        <div class="option-icon">🎬</div>
+                        <div class="option-content">
+                            <div class="option-title">Video/Audio</div>
+                            <div class="option-desc">Editing software, recording tools, streaming</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="web">
+                        <div class="option-icon">💻</div>
+                        <div class="option-content">
+                            <div class="option-title">Web/Tech</div>
+                            <div class="option-desc">WordPress, coding, databases, CRM systems</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="social">
+                        <div class="option-icon">📱</div>
+                        <div class="option-content">
+                            <div class="option-title">Social Media</div>
+                            <div class="option-desc">Instagram, LinkedIn, TikTok, Facebook Business</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="basic">
+                        <div class="option-icon">📧</div>
+                        <div class="option-content">
+                            <div class="option-title">Basic Digital</div>
+                            <div class="option-desc">Email, messaging, file sharing, basic apps</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-alert" id="insight-1">
+                    <div class="insight-title">💡 Opportunity Spotted!</div>
+                    <div class="insight-content"></div>
+                </div>
+            </div>
+
+            <div class="question-section" data-phase="1">
+                <div class="question-number">SKILLS ASSESSMENT - Question 2</div>
+                <div class="question-title">What's your strongest natural ability?</div>
+                <div class="question-subtitle">What do people often ask for your help with?</div>
+                <div class="option-grid">
+                    <div class="option" data-value="communication">
+                        <div class="option-icon">🗣️</div>
+                        <div class="option-content">
+                            <div class="option-title">Communication</div>
+                            <div class="option-desc">Writing, speaking, explaining complex things simply</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="organization">
+                        <div class="option-icon">📋</div>
+                        <div class="option-content">
+                            <div class="option-title">Organization</div>
+                            <div class="option-desc">Planning, scheduling, managing projects, systems</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="creativity">
+                        <div class="option-icon">✨</div>
+                        <div class="option-content">
+                            <div class="option-title">Creativity</div>
+                            <div class="option-desc">Design, innovation, problem-solving, artistic vision</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="teaching">
+                        <div class="option-icon">🎓</div>
+                        <div class="option-content">
+                            <div class="option-title">Teaching/Mentoring</div>
+                            <div class="option-desc">Breaking down concepts, guiding others, training</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="analysis">
+                        <div class="option-icon">📈</div>
+                        <div class="option-content">
+                            <div class="option-title">Analysis</div>
+                            <div class="option-desc">Research, data interpretation, pattern recognition</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="people">
+                        <div class="option-icon">🤝</div>
+                        <div class="option-content">
+                            <div class="option-title">People Skills</div>
+                            <div class="option-desc">Networking, relationship building, customer service</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section" data-phase="1">
+                <div class="question-number">SKILLS ASSESSMENT - Question 3</div>
+                <div class="question-title">What's your professional background?</div>
+                <div class="question-subtitle">Include current role, past jobs, or education if relevant</div>
+                <textarea class="text-input" placeholder="e.g., Marketing manager for 5 years, MBA in finance, worked in retail, freelance writer, stay-at-home parent with teaching degree..."></textarea>
+            </div>
+
+            <div class="question-section" data-phase="1">
+                <div class="question-number">SKILLS ASSESSMENT - Question 4</div>
+                <div class="question-title">What topic could you talk about for hours?</div>
+                <div class="question-subtitle">Your passion or deep knowledge area - this is your expertise goldmine</div>
+                <textarea class="text-input" placeholder="e.g., Personal finance and budgeting, fitness for busy moms, small business marketing, cooking healthy meals, dog training, productivity hacks..."></textarea>
+            </div>
+
+            <div class="question-section" data-phase="1">
+                <div class="question-number">SKILLS ASSESSMENT - Question 5</div>
+                <div class="question-title">Which online platforms do you actively use?</div>
+                <div class="question-subtitle">Where do you already have a presence or feel comfortable posting?</div>
+                <div class="option-grid">
+                    <div class="option" data-value="linkedin">
+                        <div class="option-icon">💼</div>
+                        <div class="option-content">
+                            <div class="option-title">LinkedIn</div>
+                            <div class="option-desc">Professional networking, business content</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="instagram">
+                        <div class="option-icon">📸</div>
+                        <div class="option-content">
+                            <div class="option-title">Instagram</div>
+                            <div class="option-desc">Visual content, stories, reels</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="facebook">
+                        <div class="option-icon">👥</div>
+                        <div class="option-content">
+                            <div class="option-title">Facebook</div>
+                            <div class="option-desc">Groups, marketplace, business pages</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="tiktok">
+                        <div class="option-icon">🎵</div>
+                        <div class="option-content">
+                            <div class="option-title">TikTok</div>
+                            <div class="option-desc">Short videos, trends, creative content</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="youtube">
+                        <div class="option-icon">📺</div>
+                        <div class="option-content">
+                            <div class="option-title">YouTube</div>
+                            <div class="option-desc">Video content, tutorials, educational</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="minimal">
+                        <div class="option-icon">📧</div>
+                        <div class="option-content">
+                            <div class="option-title">Minimal Online</div>
+                            <div class="option-desc">Mainly email, messaging, basic browsing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Resource Check Questions -->
+            <div class="question-section" data-phase="2">
+                <div class="question-number">RESOURCE CHECK - Question 6</div>
+                <div class="question-title">What devices do you have reliable access to?</div>
+                <div class="question-subtitle">Essential for determining which business models you can execute</div>
+                <div class="option-grid">
+                    <div class="option" data-value="computer">
+                        <div class="option-icon">💻</div>
+                        <div class="option-content">
+                            <div class="option-title">Computer/Laptop</div>
+                            <div class="option-desc">For complex tasks, detailed work, multiple screens</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="smartphone">
+                        <div class="option-icon">📱</div>
+                        <div class="option-content">
+                            <div class="option-title">Smartphone Only</div>
+                            <div class="option-desc">Can handle most modern business needs</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="tablet">
+                        <div class="option-icon">📲</div>
+                        <div class="option-content">
+                            <div class="option-title">Tablet + Phone</div>
+                            <div class="option-desc">Good middle ground for content and communication</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section" data-phase="2">
+                <div class="question-number">RESOURCE CHECK - Question 7</div>
+                <div class="question-title">How much time can you realistically dedicate?</div>
+                <div class="question-subtitle">Be honest - this determines which opportunities will actually work</div>
+                <div class="option-grid">
+                    <div class="option" data-value="intensive">
+                        <div class="option-icon">⏰</div>
+                        <div class="option-content">
+                            <div class="option-title">20+ hours/week</div>
+                            <div class="option-desc">Can treat this like a part-time job</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="moderate">
+                        <div class="option-icon">🕐</div>
+                        <div class="option-content">
+                            <div class="option-title">10-20 hours/week</div>
+                            <div class="option-desc">Evenings, weekends, lunch breaks</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="limited">
+                        <div class="option-icon">⏱️</div>
+                        <div class="option-content">
+                            <div class="option-title">5-10 hours/week</div>
+                            <div class="option-desc">Pocket of time here and there</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="minimal">
+                        <div class="option-icon">🕰️</div>
+                        <div class="option-content">
+                            <div class="option-title">Under 5 hours/week</div>
+                            <div class="option-desc">Very limited, need passive approaches</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section" data-phase="2">
+                <div class="question-number">RESOURCE CHECK - Question 8</div>
+                <div class="question-title">Where can you work from?</div>
+                <div class="question-subtitle">Your workspace affects what types of services you can offer</div>
+                <div class="option-grid">
+                    <div class="option" data-value="home-office">
+                        <div class="option-icon">🏠</div>
+                        <div class="option-content">
+                            <div class="option-title">Dedicated Home Office</div>
+                            <div class="option-desc">Quiet space, can take calls, professional setup</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="home-shared">
+                        <div class="option-icon">🏡</div>
+                        <div class="option-content">
+                            <div class="option-title">Home (Shared Space)</div>
+                            <div class="option-desc">Limited privacy, noise considerations</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="mobile">
+                        <div class="option-icon">☕</div>
+                        <div class="option-content">
+                            <div class="option-title">Mobile/Coffee Shops</div>
+                            <div class="option-desc">Need flexible, location-independent work</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="limited">
+                        <div class="option-icon">📵</div>
+                        <div class="option-content">
+                            <div class="option-title">Very Limited</div>
+                            <div class="option-desc">Mostly phone-based, brief windows</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-section" data-phase="2">
+                <div class="question-number">RESOURCE CHECK - Question 9</div>
+                <div class="question-title">Do you have any valuable connections or networks?</div>
+                <div class="question-subtitle">Existing relationships are your biggest business accelerator</div>
+                <textarea class="text-input" placeholder="e.g., Former colleagues in tech, parent groups, fitness community, professional associations, local business owners, social media followers..."></textarea>
+            </div>
+
+            <div class="question-section" data-phase="2">
+                <div class="question-number">RESOURCE CHECK - Question 10</div>
+                <div class="question-title">What's your current online presence?</div>
+                <div class="question-subtitle">Even a small following can be monetized immediately</div>
+                <div class="option-grid">
+                    <div class="option" data-value="established">
+                        <div class="option-icon">🌟</div>
+                        <div class="option-content">
+                            <div class="option-title">Established Presence</div>
+                            <div class="option-desc">1000+ followers/connections, regular engagement</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="growing">
+                        <div class="option-icon">📈</div>
+                        <div class="option-content">
+                            <div class="option-title">Growing Presence</div>
+                            <div class="option-desc">100-1000 followers, some engagement</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="minimal">
+                        <div class="option-icon">🌱</div>
+                        <div class="option-content">
+                            <div class="option-title">Minimal Presence</div>
+                            <div class="option-desc">Personal accounts, under 100 followers</div>
+                        </div>
+                    </div>
+                    <div class="option" data-value="none">
+                        <div class="option-icon">🆕</div>
+                        <div class="option-content">
+                            <div class="option-title">Starting Fresh</div>
+                            <div class="option-desc">No significant online presence yet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <div class="results-header">
+                    <div class="results-title">Your Business Opportunities</div>
+                    <div class="results-subtitle">Based on your unique skills and resources</div>
+                </div>
+
+                <div class="skill-summary" id="skillSummary">
+                    <h3>🎯 Your Top 3 Skill Combinations</h3>
+                    <div class="skill-list" id="skillList">
+                        <!-- Dynamic skill items will be inserted here -->
+                    </div>
+                </div>
+
+                <div id="opportunitiesContainer">
+                    <!-- Dynamic opportunities will be inserted here -->
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-title">Ready to Launch?</div>
+                    <div class="cta-subtitle">Pick one opportunity and start today. Success comes from action, not perfection.</div>
+                    <button class="cta-button" onclick="restart()">
+                        Find More Opportunities
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" style="display: none;">
+                ← Previous
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                Next Question →
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz State Management
+        let currentQuestion = 0;
+        let totalQuestions = 10;
+        let responses = {};
+        let currentPhase = 1;
+        
+        const phases = {
+            1: { name: "Skills Assessment", questions: [0, 1, 2, 3, 4] },
+            2: { name: "Resource Check", questions: [5, 6, 7, 8, 9] },
+            3: { name: "Business Matching", questions: [] }
+        };
+
+        // Initialize assessment
+        function startAssessment() {
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            document.body.style.background = '#f1f5f9';
+            updateProgress();
+        }
+
+        // Update progress and phase indicators
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
+            
+            // Update phase indicators
+            const newPhase = getPhaseForQuestion(currentQuestion);
+            if (newPhase !== currentPhase) {
+                // Mark previous phase as completed
+                document.getElementById(`phase${currentPhase}`).className = 'phase completed';
+                currentPhase = newPhase;
+            }
+            
+            // Update current phase
+            document.getElementById(`phase${currentPhase}`).className = 'phase active';
+            
+            // Update navigation
+            document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
+            document.getElementById('nextBtn').textContent = currentQuestion >= totalQuestions - 1 ? 'Show My Opportunities →' : 'Next Question →';
+        }
+
+        function getPhaseForQuestion(questionIndex) {
+            if (questionIndex <= 4) return 1;
+            if (questionIndex <= 9) return 2;
+            return 3;
+        }
+
+        // Handle option selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option')) {
+                const option = e.target.closest('.option');
+                const questionSection = option.closest('.question-section');
+                const options = questionSection.querySelectorAll('.option');
+                
+                // Remove previous selections
+                options.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selection
+                option.classList.add('selected');
+                
+                // Store response
+                responses[currentQuestion] = option.getAttribute('data-value');
+                
+                // Show insight if applicable
+                showInsight(currentQuestion, option.getAttribute('data-value'));
+                
+                // Enable next button
+                document.getElementById('nextBtn').disabled = false;
+            }
+        });
+
+        // Handle text input
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('text-input')) {
+                const text = e.target.value.trim();
+                
+                // Store response
+                responses[currentQuestion] = text;
+                
+                // Enable/disable next button
+                document.getElementById('nextBtn').disabled = text.length < 10;
+            }
+        });
+
+        // Show insights for specific questions
+        function showInsight(questionIndex, value) {
+            const insights = {
+                0: { // Technical tools
+                    'design': '🎯 Design skills are in huge demand! Visual content creation, social media graphics, and brand design are perfect zero-cost businesses.',
+                    'office': '💼 Excel and data skills can be monetized immediately through virtual assistant services, data analysis, or business consulting.',
+                    'video': '🚀 Video skills are gold! With everyone needing content, you could start editing services or creating templates.',
+                    'web': '⚡ Tech skills = instant income potential. Website building, automation setup, or technical consulting are always needed.',
+                    'social': '📈 Social media expertise is incredibly valuable. Businesses desperately need help with content and strategy.',
+                    'basic': '✅ Basic digital skills are enough for many lucrative opportunities like virtual assistance or online tutoring.'
+                },
+                1: { // Natural abilities
+                    'communication': '🗣️ Strong communication = multiple income streams. Writing, coaching, consulting, and training are all possibilities.',
+                    'organization': '📋 Organization skills are worth their weight in gold. Virtual assistance and project management are perfect fits.',
+                    'creativity': '✨ Creativity can be monetized in countless ways. From content creation to problem-solving consulting.',
+                    'teaching': '🎓 Teaching ability is incredibly valuable. Online tutoring, course creation, and coaching are booming.',
+                    'analysis': '📊 Analytical skills are in high demand. Research services, data analysis, and strategic consulting pay well.',
+                    'people': '🤝 People skills open many doors. Customer service, relationship building, and community management are great options.'
+                }
+            };
+
+            const insightElement = document.getElementById(`insight-${questionIndex + 1}`);
+            if (insights[questionIndex] && insights[questionIndex][value] && insightElement) {
+                const content = insightElement.querySelector('.insight-content');
+                content.textContent = insights[questionIndex][value];
+                insightElement.classList.add('show');
+            }
+        }
+
+        // Navigation functions
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions - 1) {
+                // Hide current question
+                document.querySelectorAll('.question-section')[currentQuestion].classList.remove('active');
+                
+                currentQuestion++;
+                
+                // Show next question
+                document.querySelectorAll('.question-section')[currentQuestion].classList.add('active');
+                
+                updateProgress();
+                
+                // Reset next button state
+                document.getElementById('nextBtn').disabled = !responses[currentQuestion];
+                
+                // Hide insights
+                document.querySelectorAll('.insight-alert').forEach(alert => alert.classList.remove('show'));
+                
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                // Hide current question
+                document.querySelectorAll('.question-section')[currentQuestion].classList.remove('active');
+                
+                currentQuestion--;
+                
+                // Update phase if necessary
+                const newPhase = getPhaseForQuestion(currentQuestion);
+                if (newPhase !== currentPhase) {
+                    document.getElementById(`phase${currentPhase}`).className = 'phase inactive';
+                    currentPhase = newPhase;
+                    document.getElementById(`phase${currentPhase}`).className = 'phase active';
+                }
+                
+                // Show previous question
+                document.querySelectorAll('.question-section')[currentQuestion].classList.add('active');
+                
+                updateProgress();
+                
+                // Enable next button if answer exists
+                document.getElementById('nextBtn').disabled = !responses[currentQuestion];
+            }
+        }
+
+        // Show results and generate opportunities
+        function showResults() {
+            // Hide all question sections and navigation
+            document.querySelectorAll('.question-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.querySelector('.navigation').style.display = 'none';
+            
+            // Update phase indicator
+            document.getElementById('phase2').className = 'phase completed';
+            document.getElementById('phase3').className = 'phase active';
+            
+            // Generate and display results
+            generateSkillSummary();
+            generateOpportunities();
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+            
+            // Update progress to 100%
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = 'Assessment Complete!';
+        }
+
+        // Generate skill combinations
+        function generateSkillSummary() {
+            const techSkill = responses[0] || 'basic';
+            const softSkill = responses[1] || 'communication';
+            const background = responses[2] || '';
+            const expertise = responses[3] || '';
+            
+            const skillCombinations = [
+                {
+                    name: getTechSkillLabel(techSkill) + ' + ' + getSoftSkillLabel(softSkill),
+                    description: getSkillComboDescription(techSkill, softSkill)
+                },
+                {
+                    name: 'Domain Expertise',
+                    description: expertise ? `Your knowledge in ${expertise.substring(0, 50)}${expertise.length > 50 ? '...' : ''}` : 'Your unique knowledge and experience'
+                },
+                {
+                    name: 'Professional Background',
+                    description: background ? `Leveraging your ${background.substring(0, 50)}${background.length > 50 ? '...' : ''}` : 'Your professional experience and network'
+                }
+            ];
+
+            const skillList = document.getElementById('skillList');
+            skillList.innerHTML = '';
+            
+            skillCombinations.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-desc">${skill.description}</div>
+                `;
+                skillList.appendChild(skillItem);
+            });
+        }
+
+        // Generate business opportunities
+        function generateOpportunities() {
+            const opportunities = generatePersonalizedOpportunities();
+            const container = document.getElementById('opportunitiesContainer');
+            container.innerHTML = '';
+            
+            opportunities.forEach((opportunity, index) => {
+                const opportunityElement = document.createElement('div');
+                opportunityElement.className = 'opportunity';
+                opportunityElement.innerHTML = `
+                    <div class="opportunity-header">
+                        <div class="opportunity-number">${index + 1}</div>
+                        <div class="opportunity-title">${opportunity.title}</div>
+                    </div>
+                    
+                    <div class="opportunity-model">
+                        <div class="model-title">💡 Business Model</div>
+                        <div>${opportunity.model}</div>
+                    </div>
+                    
+                    <div class="action-steps">
+                        <div class="steps-title">🚀 Start Today - Action Steps</div>
+                        <ul class="step-list">
+                            ${opportunity.steps.map((step, i) => `
+                                <li class="step-item">
+                                    <div class="step-number">${i + 1}</div>
+                                    <div class="step-content">${step}</div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+                container.appendChild(opportunityElement);
+            });
+        }
+
+        // Generate personalized opportunities based on responses
+        function generatePersonalizedOpportunities() {
+            const techSkill = responses[0];
+            const softSkill = responses[1];
+            const platform = responses[4];
+            const timeAvailable = responses[6];
+            const workspace = responses[7];
+            const onlinePresence = responses[9];
+            
+            let opportunities = [];
+            
+            // Opportunity 1: Based on primary skill combo
+            const primaryOpp = generatePrimaryOpportunity(techSkill, softSkill, platform, timeAvailable);
+            opportunities.push(primaryOpp);
+            
+            // Opportunity 2: Based on expertise and platform
+            const expertiseOpp = generateExpertiseOpportunity(responses[3], platform, onlinePresence);
+            opportunities.push(expertiseOpp);
+            
+            return opportunities;
+        }
+
+        function generatePrimaryOpportunity(techSkill, softSkill, platform, timeAvailable) {
+            const opportunityMap = {
+                'design_communication': {
+                    title: 'Social Media Content Creation Service',
+                    model: 'Create visual content packages for small businesses. Charge $200-500 per monthly package of social media graphics, posts, and basic branding materials.',
+                    steps: [
+                        'Create 5 sample social media post designs using Canva or your design tools',
+                        'Post your samples on your preferred social platform with hashtags like #smallbusinessowner #socialmediadesign',
+                        'Reach out to 10 local businesses via DM offering a free sample design',
+                        'Create a simple pricing sheet: Basic package $200, Premium $350, VIP $500',
+                        'Set up a simple payment method (PayPal, Venmo, or cash) and deliver first client work'
+                    ]
+                },
+                'office_organization': {
+                    title: 'Virtual Business Operations Assistant',
+                    model: 'Help entrepreneurs organize their business systems, processes, and data. Charge $25-50/hour for spreadsheet creation, process documentation, and administrative support.',
+                    steps: [
+                        'Create 3 useful business templates (budget tracker, client database, project planner)',
+                        'Post about your organizational skills and offer free 30-minute consultation calls',
+                        'Join Facebook groups for entrepreneurs and small business owners',
+                        'Offer your first service for $20/hour to build testimonials',
+                        'Create a simple service menu and start booking 2-3 clients per week'
+                    ]
+                },
+                'video_teaching': {
+                    title: 'Quick Tutorial Creation Service',
+                    model: 'Create short tutorial videos for businesses to train their teams or educate customers. Charge $100-300 per tutorial video depending on complexity.',
+                    steps: [
+                        'Record 3 sample tutorial videos on topics you know well (2-5 minutes each)',
+                        'Upload to your preferred platform and optimize for discovery',
+                        'Create a simple portfolio showing your tutorial style and quality',
+                        'Reach out to businesses that could use training content for their teams',
+                        'Offer first tutorial at discounted rate ($75) to build portfolio and testimonials'
+                    ]
+                },
+                'web_analysis': {
+                    title: 'Website & Digital Audit Service',
+                    model: 'Analyze businesses\' websites and digital presence, providing actionable improvement reports. Charge $150-400 per comprehensive audit.',
+                    steps: [
+                        'Create a website audit checklist covering design, speed, SEO basics, and user experience',
+                        'Audit 3 local businesses\' websites for free and create sample reports',
+                        'Reach out to business owners with a free mini-audit and upsell to full service',
+                        'Set your audit price at $200 and include a 1-hour consultation call',
+                        'Deliver your first 3 paid audits and ask for testimonials and referrals'
+                    ]
+                },
+                'social_people': {
+                    title: 'Social Media Community Management',
+                    model: 'Manage social media accounts for small businesses, focusing on engagement and community building. Charge $300-800 per month per client.',
+                    steps: [
+                        'Document your social media strategy and create a sample content calendar',
+                        'Offer to manage a friend\'s or local business\' social media for free for 2 weeks',
+                        'Create case study showing engagement improvements from your free work',
+                        'Reach out to 20 small businesses offering social media management services',
+                        'Start with $300/month packages and gradually increase as you gain experience'
+                    ]
+                }
+            };
+            
+            const comboKey = `${techSkill}_${softSkill}`;
+            return opportunityMap[comboKey] || opportunityMap['office_organization'];
+        }
+
+        function generateExpertiseOpportunity(expertise, platform, onlinePresence) {
+            if (!expertise) {
+                return {
+                    title: 'Knowledge Consultation Service',
+                    model: 'Leverage your professional experience to provide consultation calls to others in your field. Charge $50-150 per hour for advice and guidance.',
+                    steps: [
+                        'Identify 3 specific problems you can solve based on your experience',
+                        'Create a simple consultation offer and post about it on your networks',
+                        'Offer first 3 consultations at $30/hour to build testimonials',
+                        'Ask satisfied clients to refer others and gradually raise your rates',
+                        'Schedule 5-10 consultation calls per week at $75-100/hour'
+                    ]
+                };
+            }
+            
+            // Generate based on expertise topic
+            const topicLower = expertise.toLowerCase();
+            
+            if (topicLower.includes('fitness') || topicLower.includes('health') || topicLower.includes('nutrition')) {
+                return {
+                    title: 'Online Fitness/Health Coaching',
+                    model: 'Provide personalized fitness or nutrition guidance through video calls and custom plans. Charge $100-300 per month for ongoing coaching packages.',
+                    steps: [
+                        'Create a sample workout plan or nutrition guide showcasing your knowledge',
+                        'Post transformation tips and advice on your preferred social platform',
+                        'Offer free 20-minute strategy calls to potential clients',
+                        'Create coaching packages: Basic $100/month, Premium $200/month',
+                        'Start with 3-5 clients and build testimonials for program expansion'
+                    ]
+                };
+            } else if (topicLower.includes('finance') || topicLower.includes('money') || topicLower.includes('budget')) {
+                return {
+                    title: 'Personal Finance Coaching',
+                    model: 'Help individuals create budgets, pay off debt, and plan for financial goals. Charge $75-200 per session or $200-500 for comprehensive packages.',
+                    steps: [
+                        'Create a simple budgeting template and debt payoff calculator',
+                        'Share money-saving tips and financial advice on social media',
+                        'Offer free budget review calls to build your client base',
+                        'Package your services: Budget setup $150, Debt plan $200, Full financial plan $400',
+                        'Help 5-10 people per month achieve their financial goals'
+                    ]
+                };
+            } else {
+                return {
+                    title: 'Expert Consultation & Training',
+                    model: `Provide consultation and training in ${expertise}. Charge $75-200 per hour for one-on-one guidance or $300-1000 for group workshops.`,
+                    steps: [
+                        'Document your expertise into 3 key areas where you can help others',
+                        'Create a simple guide or checklist showcasing your knowledge',
+                        'Reach out to your network offering consultation in your expertise area',
+                        'Price your services at $100/hour for individual sessions',
+                        'Book 8-12 consultation hours per week and consider group workshops'
+                    ]
+                };
+            }
+        }
+
+        // Helper functions for labels and descriptions
+        function getTechSkillLabel(skill) {
+            const labels = {
+                'design': 'Visual Design',
+                'office': 'Data & Analysis',
+                'video': 'Content Creation',
+                'web': 'Technical Solutions',
+                'social': 'Digital Marketing',
+                'basic': 'Digital Coordination'
+            };
+            return labels[skill] || 'Technical Skills';
+        }
+
+        function getSoftSkillLabel(skill) {
+            const labels = {
+                'communication': 'Communication',
+                'organization': 'Organization',
+                'creativity': 'Creative Problem-Solving',
+                'teaching': 'Teaching & Mentoring',
+                'analysis': 'Strategic Analysis',
+                'people': 'Relationship Building'
+            };
+            return labels[skill] || 'Interpersonal Skills';
+        }
+
+        function getSkillComboDescription(techSkill, softSkill) {
+            return `Your ability to combine ${getTechSkillLabel(techSkill).toLowerCase()} with strong ${getSoftSkillLabel(softSkill).toLowerCase()} creates unique value for clients.`;
+        }
+
+        // Restart function
+        function restart() {
+            currentQuestion = 0;
+            currentPhase = 1;
+            responses = {};
+            
+            // Reset all phases
+            document.getElementById('phase1').className = 'phase active';
+            document.getElementById('phase2').className = 'phase inactive';
+            document.getElementById('phase3').className = 'phase inactive';
+            
+            // Show hero section
+            document.querySelector('.hero').style.display = 'block';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.body.style.background = 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%)';
+        }
+
+        // Initialize character counters and smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for navigation
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent.includes('Next') || this.textContent.includes('Previous')) {
+                        setTimeout(() => {
+                            document.querySelector('.quiz-header').scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }, 100);
+                    }
+                });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) {
+                nextQuestion();
+            } else if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                previousQuestion();
+            }
+        });
+    </script>
+</body>
+</html>
